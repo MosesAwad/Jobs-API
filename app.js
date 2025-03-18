@@ -1,5 +1,6 @@
 require('dotenv').config();
 require('express-async-errors');
+const path = require('path');
 const express = require('express');
 const app = express();
 
@@ -37,9 +38,9 @@ app.use(cors())
 app.use(xss())
 
 // default
-app.get(('/'), (req, res) => {
-  res.send('Jobs API')
-})
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // routes (and further middleware registration)
 app.use('/api/v1/auth', authRouter)
